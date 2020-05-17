@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <link rel="shortcut icon" href="/static/img/logo.ico">
+    <title>FoodFrenzy! </title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="/static/css/agency.css" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href="/static/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0//static/css/font-awesome.min.css">
+    <!-- <link rel="stylesheet" href="/static/css/normalize.css"> -->
+
+<style>
+@keyframes spinner {
+0% {
+    transform: rotateZ(0deg);
+  }
+100% {
+    transform: rotateZ(359deg);
+  }
+}
+* {
+  box-sizing: border-box;
+}
+</style>
+</head>
+
+<body id="page-top" class="index">
+
+    <header>
+        {% block body %}
+        <div class="container">
+            <div class="intro-text">
+        
+                    <div class="modal-dialog" >
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <form action="{% url 'cart' %}" method='POST'>
+                                    {% csrf_token %}
+                                <font color="#000000">
+                                    <h2>Callback Messsage: </h2>                    <br>
+                                    <h3> Checksum Verification: {{ response.STATUS }} </h3> <br>
+                                    MID: {{ response.MID }}                                  <br>
+                                    TXNID: {{ response.TXNID }}                              <br>
+                                    ORDERID: {{ response.ORDERID }}                          <br>
+                                    BANKTXNID: {{ response.BANKTXNID }}                      <br>
+                                    TXNAMOUNT: {{ response.TXNAMOUNT }}                      <br>
+                                    CURRENCY: {{ response.CURRENCY }}                        <br>
+                                    STATUS: {{ response.STATUS }}                            <br>
+                                    BANKNAME: {{ response.BANKNAME }}                         <br>
+                                    <!--h3> STATUS: {{ response.STATUS }} </h3>                 <br>
+                                    RESPCODE: {{ response.RESPCODE }}                        <br>
+                                    RESPMSG: {{ response.RESPMSG }}                          <br>
+                                    TXNDATE: {{ response.TXNDATE }}                          <br>
+                                    GATEWAYNAME: {{ response.GATEWAYNAME }}                  <br
+                                    <br><br>
+                                    BANKNAME: {{ response.BANKNAME }}                        <br>
+                                    BIN_NAME: {{ response.BIN_NAME }}                        <br>
+                                    PAYMENTMODE: {{ response.PAYMENTMODE }}                  <br>
+                                    CHECKSUMHASH: {{ response.CHECKSUMHASH }}-->
+                                </font>
+                                    <hr class="liner"/>
+                                    <button class="btn btn-lg btn-success btn-block" type="submit" value="back">
+                                            <i class="spinner"></i>
+                                            <span class="state">Return</span>
+                                    </button>
+                                </form>                                
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endblock %}
+    </header>
+
+
+</body>
+<!-- jQuery -->
+<script src="/static/js/jquery.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/static/js/bootstrap.min.js"></script>
+
+<!-- Plugin JavaScript -->
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+<script src="/static/js/classie.js"></script>
+<script src="/static/js/cbpAnimatedHeader.js"></script>
+
+<!-- Contact Form JavaScript -->
+<script src="/static/js/jqBootstrapValidation.js"></script>
+<script src="/static/js/contact_me.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/static/js/agency.js"></script>
+<script>
+    function centerModal() {
+        $(this).css('display', 'block');
+        var $dialog = $(this).find(".modal-dialog");
+        var offset = ($(window).height() - $dialog.height()) / 2;
+        // Center modal vertically in window
+        $dialog.css("margin-top", offset);
+    }
+
+    $('.modal').on('show.bs.modal', centerModal);
+    $(window).on("resize", function () {
+        $('.modal:visible').each(centerModal);
+    });
+</script>
+
+<!-- <script src=https://ajax.googleapis.com/ajax/libs/angular/static/js/1.5.0/angular.min.js></script> -->
+</html>

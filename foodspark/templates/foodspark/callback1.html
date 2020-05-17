@@ -1,0 +1,205 @@
+<!DOCTYPE html> 
+<html> 
+<style > 
+	
+	/*assign full width inputs*/ 
+	input[type=text], 
+	input[type=password] { 
+		width: 100%; 
+		padding: 12px 20px; 
+		margin: 8px 0; 
+		display: inline-block; 
+		border: 1px solid #ccc; 
+		box-sizing: border-box; 
+	} 
+	
+	/*set a style for the buttons*/ 
+	button { 
+		background-color: #12537f; 
+		color: white; 
+		padding: 14px 20px; 
+		margin: 8px 0; 
+		border: none; 
+		cursor: pointer; 
+		width: 100%; 
+		text-align:center;
+	} 
+	
+	/* set a hover effect for the button*/ 
+	button:hover { 
+		opacity: 1; 
+	} 
+	
+	/*set extra style for the cancel button*/ 
+	.cancelbtn { 
+		width: auto; 
+		padding: 10px 18px; 
+		background-color: #f44336; 
+	} 
+	
+	/*centre the display image inside the container*/ 
+	.imgcontainer { 
+		text-align: center; 
+		margin: 24px 0 12px 0; 
+		position: relative; 
+	} 
+	
+	/*set image properties*/ 
+	img.avatar { 
+		width: 40%; 
+		border-radius: 50%; 
+	} 
+	
+	/*set padding to the container*/ 
+	.container { 
+		padding: 16px; 
+	} 
+	
+	/*set the forgot password text*/ 
+	span.psw { 
+		float: right; 
+		padding-top: 16px; 
+	} 
+	
+	/*set the Modal background*/ 
+	.modal { 
+		display: none; 
+		position: fixed; 
+		z-index: 1; 
+		left: 0; 
+		top: 0; 
+		width: 100%; 
+		height: 100%; 
+		overflow: auto; 
+		background-color: rgb(0, 0, 0); 
+		background-color: rgba(0, 0, 0, 0.4); 
+		padding-top: 60px; 
+	} 
+	
+	/*style the model content box*/ 
+	.modal-content { 
+		background-color: #fefefe; 
+		margin: 5% auto 15% auto; 
+		border: 1px solid #888; 
+		width: 30%; 
+		height: 80%;
+	} 
+	
+	/*style the close button*/ 
+	.close { 
+		position: absolute; 
+		right: 25px; 
+		top: 0; 
+		color: #000; 
+		font-size: 35px; 
+		font-weight: bold; 
+	} 
+	
+	.close:hover, 
+	.close:focus { 
+		color: red; 
+		cursor: pointer; 
+	} 
+	
+	/* add zoom animation*/ 
+	.animate { 
+		-webkit-animation: animatezoom 0.6s; 
+		animation: animatezoom 0.6s 
+	} 
+	
+	@-webkit-keyframes animatezoom { 
+		from { 
+			-webkit-transform: scale(0) 
+		} 
+		to { 
+			-webkit-transform: scale(1) 
+		} 
+	} 
+	
+	@keyframes animatezoom { 
+		from { 
+			transform: scale(0) 
+		} 
+		to { 
+			transform: scale(1) 
+		} 
+	} 
+	
+	@media screen and (max-width: 300px) { 
+		span.psw { 
+			display: block; 
+			float: none; 
+		} 
+		.cancelbtn { 
+			width: 100%; 
+		} 
+	} 
+	
+	
+</style>
+<style>
+body {
+  background-image: url('static/img/bg22.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+</style>
+
+<body > 
+
+	<h2 style = "text-align:center; font-color:#ffffff">Click below to start secure payment</h2> 
+	<!--Step 1 : Adding HTML-->
+	<div class="text-center">
+	<button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Start</button> 
+	</div>
+	<div id="id01" class="modal"> 
+
+			
+	{% block body %}
+
+	<div class="container">
+    {{reponse}}
+    <div class="col my-4">
+        <h2 style="text-align:center">Transaction Receipt </h2>                    <br>
+        
+        <h3> Checksum Verification: {{ response.message }} </h3> <br>
+        MID: {{ response.MID }}                                  <br>
+        TXNID: {{ response.TXNID }}                              <br>
+        ORDERID: {{ response.ORDERID }}                          <br>
+        BANKTXNID: {{ response.BANKTXNID }}                      <br>
+        TXNAMOUNT: {{ response.TXNAMOUNT }}                      <br>
+        CURRENCY: {{ response.CURRENCY }}                        <br>
+        <!--h3> STATUS: {{ response.STATUS }} </h3>                 <br>
+        <!--RESPCODE: {{ response.RESPCODE }}                        <br>
+        RESPMSG: {{ response.RESPMSG }}                          <br>
+        TXNDATE: {{ response.TXNDATE }}                          <br>
+        GATEWAYNAME: {{ response.GATEWAYNAME }}                  <br-->
+		<br><br>
+        BANKNAME: {{ response.BANKNAME }}                        <br>
+        BIN_NAME: {{ response.BIN_NAME }}                        <br>
+        PAYMENTMODE: {{ response.PAYMENTMODE }}                  <br>
+        <!--CHECKSUMHASH: {{ response.CHECKSUMHASH }} -->
+    </div>
+	<hr class="liner"/>
+	<div class="text-center">
+    <form action="{% url 'cart' %}" method='POST'>
+        {% csrf_token %}
+		
+    <button type='submit' value='back' >Pay</button>
+    </form>
+	</div> 
+ </div>
+ </div>
+	<script> 
+		var modal = document.getElementById('id01'); 
+		window.onclick = function(event) { 
+			if (event.target == modal) { 
+				modal.style.display = "none"; 
+			} 
+		} 
+	</script> 
+</body> 
+{% endblock %}
+
+</html> 

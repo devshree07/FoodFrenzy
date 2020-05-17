@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="/static/img/logo.ico">
+
+    <title>Home FoodFrenzy</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="/static/css/mystyle.css" rel="stylesheet">
+    <link href="/static/css/simple-sidebar.css" rel="stylesheet">
+
+    <!-- This is for card view -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+
+</head>
+
+<body>
+    <!-- navbar centred text vertically with  line-height-->
+    <nav class="navbar navbar-nav navbar-default navbar-fixed-top" style="line-height:50px;height:60px;">
+        <div class="container" style="margin:0 !important;">
+            <span class="navbar-left" style="font-size:1.2em;"><img src="/static/img/logo.gif" class="logo_bitch"/>   FoodFrenzy</span>
+
+            <!-- Search bar -->
+            <form class="input-group" style="height: 100%;" action="/search/" method="post">
+            {%csrf_token%}
+                <div class="input-group-btn search-panel">
+                    <button type="button" class="btn btn-outline-secondary dropdown-toggle navbar-btn usersearchbtn1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                        <span id="search_concept" >Select</span></button>
+                    <ul class="dropdown-menu scrollable-dropdown" aria-labelledby="usersearchbtn1" style="margin-top: -36px;">
+                        <!--
+                        <select name="search_param" id="search_param">
+                            <option value="All">All</option>
+                            <option value="Restaurant">Restaurant</option>
+                            <option value="Food">Food</option>
+                            <option value="Cuisine">Cuisine</option>
+                            <option value="City">City</option>
+                        </select>
+                        -->
+                        
+                        <li><a href="#"><input type="hidden" name="search_param" value="All" id="search_param" onclick="showInput();"/>All</li>
+                        <li><a href="#"><input type="hidden" name="search_param" value="Restaurant" id="search_param" onclick="showInput();"/>Restaurant</li>
+                        <li><a href="#"><input type="hidden" name="search_param" value="Food" id="search_param" onclick="showInput();"/>Food</li>
+                        <li><a href="#"><input type="hidden" name="search_param" value="Cuisine" id="search_param" onclick="showInput();"/>Cuisine</li>
+                        <li><a href="#"><input type="hidden" name="search_param" value="City" id="search_param" onclick="showInput();"/>City</li> 
+                    </ul>
+                </div>
+                <span id='display'></span>
+                <input type="text" class="form-control" name="search" id="usersearch" placeholder={% if searchkey %}{{searchkey}} {% else %} Search Restaurants, Cuisines, and Food {%endif%} />
+                <span class="input-group-btn">
+                    <button class="btn btn-outline-secondary navbar-btn usersearchbtn" type="button">
+                        <span class="glyphicon glyphicon-search" ></span>
+                    </button>
+                </span>
+            </form>
+
+        </div>
+    </nav>
+
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="/home/">
+                        Hello, {{customer.name}}
+                    </a>
+                </li>
+                <li class="sidebar-brand">
+                    <a href="/home/">
+                        Place Your Order!
+                    </a>
+                </li>
+                <li>
+                    <a href="/details/">My Profile</a>
+                </li>
+                <li>
+                    <a href="/history/">Order History</a>
+                </li>
+                <li>
+                    <a href="/cart/">Your Cart</a>
+                </li>
+                <li>
+                    <a href="/logout/">Log out</a>
+                </li>
+                <li>
+                    <a href="/about/">About</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
+        <div style="margin-top:60px;">
+
+        </div>
+<!--
+        <a href="#menu-toggle" class="btn btn-default fa-bars" id="menu-toggle">
+             <span class="glyphicon glyphicon-menu-hamburger"></span>
+        </a>-->
+        <!-- Page Content -->
+        <div id="page-content-wrapper" style="padding:0; margin:0;">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12" style="padding:0; margin:0;">
+                        <div class="slideshow">
+                            <div id="myCarousel" class="carousel slide cover_carousel" data-ride="carousel">
+                                <!-- Carousel indicators -->
+                                <ol class="carousel-indicators">
+                                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                                    <li data-target="#myCarousel" data-slide-to="1"></li>
+                                    <li data-target="#myCarousel" data-slide-to="2"></li>
+                                </ol>
+                                <!-- Wrapper for carousel items -->
+                                <div class="carousel-inner">
+                                    <div class="item active">
+                                        <img src="/static/img/bg5.jpg" alt="First Slide">
+                                    </div>
+                                    <div class="item">
+                                        <img src="/static/img/bg2.jpg" alt="Second Slide">
+                                    </div>
+                                    <div class="item">
+                                        <img src="/static/img/bg4.jpg" alt="Third Slide">
+                                    </div>
+                                </div>
+                                <!-- Carousel controls -->
+                                <a class="carousel-control left" href="#myCarousel" data-slide="prev">
+                                    <span class="glyphicon glyphicon-chevron-left"></span>
+                                </a>
+                                <a class="carousel-control right" href="#myCarousel" data-slide="next">
+                                    <span class="glyphicon glyphicon-chevron-right"></span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style="margin-top:30px;">
+
+                </div>
+
+                <h1 style="padding-left: 20px;">Serving Restaurants</h1>
+                <hr class="liner"/>
+                {% if count == 1 %}
+                <div id="terabaaphumain">
+                    <div class="rest_details lefty" style="float:left;">
+                        <div class="row">
+                            {% if restaurants %}
+                            <div class="col-sm-4">
+                                <div class="card" style="width: 15rem;">
+                                    <a href = "/restaurant/McDonalds"><img class="card-img-top" src="/static/img/mcdonalds-logo.jpg" alt="Card image cap"></a>
+                                    <div class="card-block">
+                                        <h4 class="card-title"><a href = "/restaurant/McDonalds">Mc Donalds</a></h4>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <div class="card" style="width: 15rem;">
+                                    <a href = "/restaurant/Subway"><img class="card-img-top" src="/static/img/sub.jpg" alt="Card image cap">
+                                    </a><div class="card-block">
+                                        <h4 class="card-title"><a href = "/restaurant/Subway">Subway</a></h4>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <div class="card" style="width: 15rem;">
+                                    <a href = "/restaurant/PizzaHut"><img class="card-img-top" src="/static/img/pizza.png" alt="Card image cap"></a>
+                                    <div class="card-block">
+                                        <h4 class="card-title"><a href = "/restaurant/PizzaHut">Pizza Hut</a></h4>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <div class="card" style="width: 15rem;">
+                                    <a href = "/restaurant/BurgerKing"><img class="card-img-top" src="/static/img/bk.png" alt="Card image cap">
+                                    </a><div class="card-block">
+                                        <h4 class="card-title"><a href = "/restaurant/BurgerKing">Burger King</a></h4>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <div class="card" style="width: 15rem;">
+                                    <a href = "/restaurant/Dominos"><img class="card-img-top" src="/static/img/dlogo.png" alt="Card image cap"></a>
+                                    <div class="card-block">
+                                        <h4 class="card-title"><a href = "/restaurant/Dominos">Dominos</a></h4>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4">
+                                        <div class="card" style="width: 15rem;">
+                                    <a href = "/restaurant/DrukenMonkey"><img class="card-img-top" src="/static/img/drmlogo.png" alt="Card image cap"></a>
+                                    <div class="card-block">
+                                        <h4 class="card-title"><a href = "/restaurant/DrukenMonkey">Drunken Monkey</a></h4>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            {% for restaurant in restaurants %}
+                            {% if restaurant.name != "Dominos" and restaurant.name != "McDonalds" and restaurant.name != "PizzaHut" and restaurant.name != "Subway" and restaurant.name != "BurgerKing"  %}
+                            <div class="col-sm-4">
+                                <div class="card" style="width: 15rem;">
+                                    <a href = "/restaurant/{{restaurant.name}}"><img class="card-img-top" src="/static/img/bg1.jpg" alt="Card image cap"></a>
+                                    <div class="card-block">
+                                        <h4 class="card-title"><a href = "/restaurant/{{restaurant.name}}">{{restaurant.name}}</a></h4>
+
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% endfor %}
+
+                            {% endif %}
+                        </div>
+
+                    </div> <!-- Rest details end-->
+
+
+                    <!-- recommended section-->
+                
+                {% endif %}
+
+
+                    <!-- DISPLAY RESTAURANTS AFTER SEARCH -->
+                    {% if count == 0 %}
+                    <div id="terabaaphumain">
+                        <div class="rest_details lefty" style="float:left;">
+                            <div class="row">
+                                {% if rest %}
+                                
+                                
+
+                                {% for rt in rest %}
+                                {% if rt.name == "Dominos" %}
+                                <div class="col-sm-4">
+                                    <div class="card" style="width: 15rem;">
+                                        <a href = "/restaurant/Dominos"><img class="card-img-top" src="/static/img/dlogo.png" alt="Card image cap"></a>
+                                        <div class="card-block">
+                                            <h4 class="card-title"><a href = "/restaurant/Dominos">Dominos</a></h4>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endif %}
+                                
+                                {% if rt.name == "McDonalds" %}
+                                <div class="col-sm-4">
+                                    <div class="card" style="width: 15rem;">
+                                        <a href = "/restaurant/McDonalds"><img class="card-img-top" src="/static/img/mcdonalds-logo.jpg" alt="Card image cap"></a>
+                                        <div class="card-block">
+                                            <h4 class="card-title"><a href = "/restaurant/McDonalds">Mc Donalds</a></h4>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {% endif %}
+
+                                {% if rt.name == "PizzaHut" %}
+
+                                <div class="col-sm-4">
+                                    <div class="card" style="width: 15rem;">
+                                        <a href = "/restaurant/PizzaHut"><img class="card-img-top" src="/static/img/pizza.png" alt="Card image cap"></a>
+                                        <div class="card-block">
+                                            <h4 class="card-title"><a href = "/restaurant/PizzaHut">Pizza Hut</a></h4>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {% endif %}
+
+                                {% if rt.name == "Subway" %}
+                                <div class="col-sm-4">
+                                    <div class="card" style="width: 15rem;">
+                                        <a href = "/restaurant/Subway"><img class="card-img-top" src="/static/img/sub.jpg" alt="Card image cap">
+                                        </a><div class="card-block">
+                                            <h4 class="card-title"><a href = "/restaurant/Subway">Subway</a></h4>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {% endif %}
+
+                                {% if rt.name == "BurgerKing" %}
+                                <div class="col-sm-4">
+                                    <div class="card" style="width: 15rem;">
+                                        <a href = "/restaurant/BurgerKing"><img class="card-img-top" src="/static/img/bk.png" alt="Card image cap">
+                                        </a><div class="card-block">
+                                            <h4 class="card-title"><a href = "/restaurant/BurgerKing">Burger King</a></h4>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {% endif %}
+
+                                {% if rt.name == "DrukenMonkey" %}                                
+                                
+                                <div class="col-sm-4">
+                                            <div class="card" style="width: 15rem;">
+                                        <a href = "/restaurant/DrukenMonkey"><img class="card-img-top" src="/static/img/drmlogo.png" alt="Card image cap"></a>
+                                        <div class="card-block">
+                                            <h4 class="card-title"><a href = "/restaurant/DrukenMonkey">Drunken Monkey</a></h4>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endif %}
+
+                                {% if rt.name != "Dominos" and rt.name != "McDonalds" and rt.name != "PizzaHut" and rt.name != "Subway" and rt.name != "BurgerKing"  %}
+                                <div class="col-sm-4">
+                                    <div class="card" style="width: 15rem;">
+                                        <a href = "/restaurant/{{rt.name}}"><img class="card-img-top" src="/static/img/bg1.jpg" alt="Card image cap"></a>
+                                        <div class="card-block">
+                                            <h4 class="card-title"><a href = "/restaurant/{{rt.name}}">{{rt.name}}</a></h4>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endif %}
+                                {% endfor %}
+
+                                {% endif %}
+                            </div>
+
+                        </div> <!-- Rest details end-->
+
+
+                    <!-- recommended section-->
+                
+                    {% endif %}
+
+
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="/static/js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/static/js/bootstrap.min.js"></script>
+
+    <!-- Menu Toggle Script -->
+    <script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+
+    // Search bar code
+    $(document).ready(function(e){
+     $('.search-panel .dropdown-menu').find('a').click(function(e) {
+           e.preventDefault();
+           var param = $(this).attr("href").replace("#","");
+           var concept = $(this).text();
+           $('.search-panel span#search_concept').text(concept);
+           $('.input-group #search_param').val(concept);
+
+       });
+     });
+    </script>
+
+    <script language="JavaScript">
+    function showInput() {
+        document.getElementById('display').innerHTML = 
+                    document.getElementById("search_param").value;
+    }
+  </script>
+
+</body>
+
+</html>

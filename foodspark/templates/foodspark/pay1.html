@@ -1,0 +1,99 @@
+<!DOCTYPE html> 
+<html> 
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title> Payment Home </title>
+<style> 
+Body {
+  font-family: Calibri, Helvetica, sans-serif;
+  background-image: url('static/img/bg22.jpg');
+  background-size:cover;
+}
+button { 
+       background-color: #12537f; 
+       width: auto;
+        color: orange; 
+        padding: 15px; 
+        margin: 10px 0px; 
+        border: none; 
+        cursor: pointer; 
+         } 
+ form { 
+        border: 2px solid #ffffff;
+		opacity:0.9;
+		width:300px;
+		background-color: #505050; 
+		color:#fff;
+		border-radius:25px;
+    } 
+ input[type=text], input[type=password] { 
+        width: 10%; 
+        margin: 8px 0;
+        padding: 12px 20px; 
+        display: inline-block; 
+        border: 2px solid #505050; 
+        box-sizing: border-box; 
+		border-radius:15px;
+    }
+ button:hover { 
+        opacity: 1; 
+    } 
+  
+    .btn {
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+	text-size:20px;
+}
+.btn-primary {
+    color: #fff;
+    background-color: #000000;
+    border-color: #000000;
+	height:30px;
+	width:auto;
+	border-radius:15px;
+	
+}
+.amfield{
+	height:30px;
+	width:100px; 
+	text-align:center;
+	opacity:1;
+	
+
+}
+   
+ .container { 
+        padding: 25px; 
+		border-radius:15px;
+		
+    } 
+</style> 
+</head>  
+<body>  
+	<center><h1>Payment Home</h1> 
+    {% if error %}
+    <h3>{{ error }}</h3>
+    {% endif %}
+    <form action="pay" method="POST">
+        {% csrf_token %}
+        <div class="container"> 
+         <label for="username"><b>Username:</b> </label><br>
+        <input class="amfield" style="width:auto" type="text" name="username" required><br>
+        <label for="password"><b>Password:</b> </label><br>
+        <input class="amfield" style="width:auto" type="text" name="password" required><br>
+        <label for="amount"><b>To Pay Amount:</b></label><br>
+        <input class="amfield" style="width:auto" type="number" name="amount" value={{amount}} disabled><br> <br> <br>
+        <input type="submit" class="btn btn-primary" name="submit" style="font-color:white" value="Submit" required>
+
+        </div> 
+    </form>
+	</center>
+</body>   
+</html>
+
+ 
